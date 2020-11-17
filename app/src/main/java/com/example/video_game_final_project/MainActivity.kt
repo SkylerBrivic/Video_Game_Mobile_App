@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import com.q42.android.scrollingimageview.ScrollingImageView
 import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel.checkEverything()
+
         val executorService: ExecutorService = Executors.newFixedThreadPool(1)
         executorService.execute {
             var newGames = ArrayList<FavoriteGame>()
