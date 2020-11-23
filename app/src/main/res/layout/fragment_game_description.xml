@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="700dp"
+    android:layout_width="400dp"
+    app:cardCornerRadius="30dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/detailedGameTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="300dp"
+            android:layout_marginTop="4dp"
+            android:text="Title"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/detailedGamePicture"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="No Image Available"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailedGameTitleText" />
+
+            <TextView
+                android:id="@+id/detailedPlatformsText"
+                android:layout_width="wrap_content"
+                android:maxWidth="200dp"
+                android:layout_height="wrap_content"
+                android:text="Platforms: "
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="0dp"
+                app:layout_constraintStart_toEndOf="@+id/detailedReleaseYear"
+                app:layout_constraintTop_toBottomOf="@+id/detailedGamePicture"/>
+
+        <TextView
+            android:id="@+id/detailedReleaseYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="0dp"
+            android:text="Released: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailedGamePicture" />
+
+
+
+            <TextView
+                android:id="@+id/detailedGameDescription"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="Summary: "
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailedPlatformsText"/>
+
+
+
+        <NumberPicker
+            android:id="@+id/ratingSelector"
+            android:layout_width="90dp"
+            android:layout_height="220dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailedGameDescription" />
+
+        <Button
+            android:id="@+id/ratingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="44dp"
+            android:maxWidth="140dp"
+            android:text="Rate and Add Game To Profile"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/ratingSelector"
+            app:layout_constraintTop_toBottomOf="@+id/detailedGameDescription" />
+
+        <Button
+            android:id="@+id/unrateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="28dp"
+            android:text="Unrate Game"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/ratingSelector"
+            app:layout_constraintTop_toBottomOf="@+id/ratingButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.cardview.widget.CardView>

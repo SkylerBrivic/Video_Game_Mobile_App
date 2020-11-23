@@ -1,12 +1,9 @@
 package com.example.video_game_final_project
 
-import android.os.AsyncTask.execute
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import com.q42.android.scrollingimageview.ScrollingImageView
-import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -16,8 +13,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.checkEverything()
 
+        viewModel.checkEverything()
+        viewModel.platformsList.value?.add(14)
+        viewModel.database.value = GameDB.getDBObject(this)
+        var myList = viewModel.database.value?.gameDAO()?.getAll()!!
+        for(e in myList)
+            Log.d("TAG_MSG", "Game Name: " + e.gameName + "\tRating: " + e.rating.toString())
+
+        /*
         val executorService: ExecutorService = Executors.newFixedThreadPool(1)
         executorService.execute {
             var newGames = ArrayList<FavoriteGame>()
@@ -31,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             newGames.add(tempFinalGame)
 
             viewModel.bestGamesList.value?.gameList  = newGames
-            viewModel.updateGeneralGamesList()
+            viewModel.updateSuggestedGamesList()
             var resultString = "Size: " + viewModel.generalGamesList.value?.size.toString() + "\n"
             for(e in viewModel.generalGamesList.value!!)
             {
@@ -39,6 +43,8 @@ class MainActivity : AppCompatActivity() {
             }
             Log.d("TAG_MSG", resultString)
         }
+        */
+
 
     }
 }

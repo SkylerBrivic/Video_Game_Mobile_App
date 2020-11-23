@@ -4,7 +4,7 @@ package com.example.video_game_final_project
 //Consequently, this class only stores the ID value of a game and the heuristic value for how much the user is expected to like the game.
 //When a page of the reccomended games list is loaded, these generalGame IDs are used in calls to RAWG.io to find the detailed
 //information about a game, which is stored as a FavoriteGame object.
-class GeneralGame(tempID: Int, tempSimilarity:Double) {
+class GeneralGame(tempID: Int, tempSimilarity:Double, tempName:String, tempURL: String, tempRelease:String) {
 
     var ID: Int = 0
 
@@ -13,9 +13,14 @@ class GeneralGame(tempID: Int, tempSimilarity:Double) {
     var similarityIndex = 0.0
 
     var gameName = ""
+    var previewURL = ""
+    var releaseDate = ""
 
     init{
         ID = tempID
         similarityIndex = tempSimilarity
+        gameName = tempName
+        previewURL = tempURL
+        releaseDate = tempRelease
     }
 }

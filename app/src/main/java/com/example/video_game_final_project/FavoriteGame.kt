@@ -20,6 +20,8 @@ class FavoriteGame {
     //Stores the ID vals for the platforms of the game.
     var platformList = ArrayList<Int>()
 
+    var platformNames = ArrayList<String>()
+    var previewURL = ""
     //for games in the user's reccomended list, this is set to the appropriate value.
     var description = ""
 

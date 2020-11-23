@@ -5,12 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.q42.android.scrollingimageview.ScrollingImageView
-import kotlinx.android.synthetic.main.fragment_home_screen.*
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,15 +14,14 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HomeScreenFragment.newInstance] factory method to
+ * Use the [BackgroundFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeScreenFragment : Fragment() {
+class BackgroundFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    val viewModel: GameViewModel by activityViewModels<GameViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,23 +35,25 @@ class HomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_screen, container, false)
+        return inflater.inflate(R.layout.fragment_background, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        randomButton.setOnClickListener {
-            val executorService: ExecutorService = Executors.newFixedThreadPool(1)
-            executorService.execute {
-                viewModel.currentGame.postValue(null)
-                viewModel.getRandomGame()
-            }
-            findNavController().navigate(R.id.action_homeScreenFragment_to_randomGameFragment)
-        }
-
+    override fun onResume() {
+        super.onResume()
+        var myScroll: ScrollingImageView = this.view?.findViewById<ScrollingImageView>(R.id.skyBackgroundID)!!
+        myScroll.start()
+        myScroll = this.view?.findViewById<ScrollingImageView>(R.id.grassBackgroundID)!!
+        myScroll.start()
     }
 
+    override fun onPause() {
+        super.onPause()
+        var myScroll: ScrollingImageView = this.view?.findViewById<ScrollingImageView>(R.id.skyBackgroundID)!!
+        myScroll.stop()
+        myScroll = this.view?.findViewById<ScrollingImageView>(R.id.grassBackgroundID)!!
+        myScroll.stop()
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -65,12 +61,12 @@ class HomeScreenFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeScreenFragment.
+         * @return A new instance of fragment BackgroundFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HomeScreenFragment().apply {
+            BackgroundFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -3,14 +3,18 @@ package com.example.video_game_final_project
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.*
+import org.json.JSONObject
+import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 class GameViewModel : ViewModel() {
     val apiManager = MutableLiveData<APIManager>()
     var bestGamesList = MutableLiveData<FavoriteVideoGamesList>()
     var generalGamesList = MutableLiveData<ArrayList<GeneralGame>>()
+    var currentGame = MutableLiveData<FavoriteGame>()
     var genGamesUpToDate = MutableLiveData<Boolean>()
     var platformsList = MutableLiveData<MutableSet<Int>>()
+    var database = MutableLiveData<GameDB>()
 
     init {
         apiManager.value = APIManager(this)
@@ -18,6 +22,7 @@ class GameViewModel : ViewModel() {
         generalGamesList.value = ArrayList<GeneralGame>()
         genGamesUpToDate.value = false
         platformsList.value = mutableSetOf()
+        currentGame.value = FavoriteGame()
     }
 
     fun checkEverything()
@@ -59,7 +64,37 @@ class GameViewModel : ViewModel() {
     }
 
 
-    fun updateGeneralGamesList()
+
+    fun getRandomGame()
+    {
+        if(platformsList.value?.isEmpty()!!)
+        {
+            Log.d("TAG_MSG", "Error: You have to add a platform to your list before a random game can be returned!")
+            return
+        }
+
+        var platformString = getPlatformString()
+        var lastPageIndex = apiManager.value?.getLastValidPage(platformString)!!
+
+        var selectedPage = Random.nextInt(1, lastPageIndex + 1)
+        var resultingJSONString = apiManager.value?.getRandomPage(selectedPage, platformString)
+        var jsonObj = JSONObject(resultingJSONString)
+        if(apiManager.value?.checkIfPageValid(jsonObj) == false)
+        {
+            Log.d("TAG_MSG", "Error: Page returned in call to getRandomGame() was invalid!")
+            return
+        }
+
+        var JSONArrayObject = jsonObj.getJSONArray("results")
+        var selectedGameIndex = Random.nextInt(0, JSONArrayObject.length())
+
+        Log.d("TAG_MSG", "Selected Game Index: " + selectedGameIndex.toString())
+        var myGameID = JSONArrayObject.getJSONObject(selectedGameIndex).getInt("id")
+        currentGame.postValue(apiManager.value?.getSpecificGame(myGameID)!!)
+    }
+
+
+    fun updateSuggestedGamesList()
     {
         //if generalGamesList is already up to date, and the dictionaries haven't changed, then we can return
         if(genGamesUpToDate.value!!)
@@ -97,8 +132,7 @@ class GameViewModel : ViewModel() {
         while(apiManager.value?.hitEnd == false && pageIndex <= 25)
         {
             Log.d("TAG_MSG", "Page Num: " + pageIndex.toString())
-            apiManager.value?.getGames(pageIndex, platformString, genreString)
-
+            apiManager.value?.getSuggestedGames(pageIndex, platformString, genreString)
 
 
             Log.d("TAG_MSG", "Escaped!")
@@ -140,10 +174,8 @@ class GameViewModel : ViewModel() {
                 }
 
                 var finalHeuristic = genreHeuristic + tagHeuristic + platformHeuristic
-                var finalGame = GeneralGame(myGame.gameID, finalHeuristic)
-                finalGame.gameName = myGame.gameName
+                var finalGame = GeneralGame(myGame.gameID, finalHeuristic, myGame.gameName, myGame.previewURL, myGame.releaseDate)
                 generalGamesList.value?.add(finalGame)
-
             }
             ++pageIndex
         }
@@ -153,5 +185,17 @@ class GameViewModel : ViewModel() {
         generalGamesList.value?.sortBy{(it.similarityIndex) * -1}
         genGamesUpToDate.postValue(true)
         Log.d("TAG_MSG", "Done processing gen video games list!")
+    }
+
+    fun isRated(gameID: Int) : Boolean
+    {
+        if(database.value?.gameDAO()?.getRating(gameID)!!.isEmpty())
+            return false
+        return true
+    }
+
+    fun getRating(gameID: Int) : Double
+    {
+        return apiManager.value?.getRating(gameID)!!
     }
 }

@@ -1,0 +1,28 @@
+<LinearLayout
+    android:id="@+id/backgroundFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scrolling_image_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BackgroundFragment">
+        <com.q42.android.scrollingimageview.ScrollingImageView
+
+            android:id="@+id/skyBackgroundID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleY="1.5"
+            scrolling_image_view:speed="-1dp"
+            scrolling_image_view:src="@drawable/sky_background" />
+
+        <com.q42.android.scrollingimageview.ScrollingImageView
+            android:id="@+id/grassBackgroundID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:scaleY="0.6"
+            scrolling_image_view:speed = "0.5dp"
+            scrolling_image_view:src = "@drawable/grass"/>
+
+    </LinearLayout>
