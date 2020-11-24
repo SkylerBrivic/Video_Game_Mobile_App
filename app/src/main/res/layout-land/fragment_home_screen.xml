@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This is the same as the fragment_home_screen.xml file, except that it controls how the HomeScreenFragment
+    looks in landscape mode.-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:scrolling_image_view="http://schemas.android.com/apk/res-auto"

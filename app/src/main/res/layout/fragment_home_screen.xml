@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This is the fragment that loads when the user first starts up the app. It has a scrolling background image fragment, and also
+    has a series of buttons for navigating to the other fragments of the app. This file only applies when the phone is in portrait mode.-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:scrolling_image_view="http://schemas.android.com/apk/res-auto"

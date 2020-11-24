@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This fragment is what is loaded onscreen when the user clicks on the random game button.
+    It contains 2 fragments: The scrolling background fragment, and a game description fragment to
+    show information about the randomly selected game.-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"

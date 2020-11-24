@@ -20,6 +20,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [RandomGameFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+//RandomGameFragment is the fragment which displays a random game when the user clicks on the random game button.
+//clicking on the random game button causes the current game in the view model to be set to a random game,
+//and causes the random game fragment to load. The RandomGameFragment contains a GameDescriptionFragment in it,
+//which has code in it's file to load the details of the current game in the view model onto the screen.
+//Consequently, this file has no additional code needed to load a game onto the screen, since all of that code
+//is in the GameDescriptionFragment
+
 class RandomGameFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

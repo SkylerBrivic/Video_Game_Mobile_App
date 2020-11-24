@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+//This database class uses the GameDatabaseObject to model each entity,
+//and uses the GameDAO class for all database queries.
 @Database(entities = [GameDatabaseObject::class], version = 1)
 abstract class GameDB : RoomDatabase() {
 
@@ -22,7 +24,6 @@ abstract class GameDB : RoomDatabase() {
                         .allowMainThreadQueries().fallbackToDestructiveMigration().build()
                 }
             }
-
             return INSTANT
         }
 

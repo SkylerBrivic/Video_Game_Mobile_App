@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This is the navigation graph for the application. It also contains the animations that show transitions between each fragment.-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,11 @@
         tools:layout="@layout/fragment_home_screen" >
         <action
             android:id="@+id/action_homeScreenFragment_to_randomGameFragment"
-            app:destination="@id/randomGameFragment" />
+            app:destination="@id/randomGameFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/randomGameFragment"

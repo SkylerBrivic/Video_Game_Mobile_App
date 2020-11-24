@@ -4,19 +4,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+//Written by Skyler Brivic & Cat Mei
 
+//the MainActivity is the only activity in this app.
+//All fragments are loaded into this MainActivity.
 class MainActivity : AppCompatActivity() {
     val viewModel by viewModels<GameViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        viewModel.checkEverything()
-        viewModel.platformsList.value?.add(14)
         viewModel.database.value = GameDB.getDBObject(this)
+        viewModel.initialize()
+
+        //All of the code below is used for debugging, and should be deleted or commented out later on.
+        viewModel.platformsList.value?.add(14)
         var myList = viewModel.database.value?.gameDAO()?.getAll()!!
         for(e in myList)
             Log.d("TAG_MSG", "Game Name: " + e.gameName + "\tRating: " + e.rating.toString())

@@ -10,6 +10,9 @@ import java.net.URL
 /**
  * @constructor : to create a PosterLoader instance, use PosterLoader.getInstance()
  */
+
+//This class is used to take a web address of an image and to load the image into an image view.
+//Credits to Professor Niu for writing this code. Small modifications to this file were made by Skyler Brivic (namely, removing the baseurl from the class)
 class PosterLoader {
 
     companion object {

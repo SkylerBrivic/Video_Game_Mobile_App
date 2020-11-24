@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--This fragment displays the background image of the scrolling sky and cat. The fragment uses the ScrollingImageView (which is downloaded from the internet)
+    in order to make the top and bottom parts of the background image continuously move in opposite directions. Note that this file is for when the phone is in portrait mode.-->
 <LinearLayout
     android:id="@+id/backgroundFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"

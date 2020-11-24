@@ -17,6 +17,10 @@ private const val ARG_PARAM2 = "param2"
  * Use the [BackgroundFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+
+//This class handles the scrolling background image of the sky and the cat that are in the
+//background while the app is running.
 class BackgroundFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -38,6 +42,7 @@ class BackgroundFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_background, container, false)
     }
 
+    //All onResume() does is make both the sky image and cat image animations start moving.
     override fun onResume() {
         super.onResume()
         var myScroll: ScrollingImageView = this.view?.findViewById<ScrollingImageView>(R.id.skyBackgroundID)!!
@@ -46,6 +51,7 @@ class BackgroundFragment : Fragment() {
         myScroll.start()
     }
 
+    //All onPause() does is make both the sky image and the cat image animations stop moving.
     override fun onPause() {
         super.onPause()
         var myScroll: ScrollingImageView = this.view?.findViewById<ScrollingImageView>(R.id.skyBackgroundID)!!

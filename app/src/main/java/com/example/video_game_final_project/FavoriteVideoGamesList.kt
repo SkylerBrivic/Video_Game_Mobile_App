@@ -1,7 +1,13 @@
 package com.example.video_game_final_project
 
+//FavoriteVideoGamesList is a class which contains dictionaries which reflect how popular
+//(or unpopular) specific genres, tags, and platforms were for the user.
+
+//Note: despite the word "Favorite" being in the class name, this class stores all games that the user rates,
+//which also includes games the user rates poorly/doesn't like. RatedVideoGamesList would thus possibly be a more accurate name for this class...
 class FavoriteVideoGamesList {
 
+    //gameList is the list of games the user has rated, which are shown on the user's profile page.
     var gameList = ArrayList<FavoriteGame>()
 
     //each of these 3 dictionaries is has keys representing the ID value of the genre, tag, and platform respectively for the 3 dictionaries.
@@ -12,10 +18,10 @@ class FavoriteVideoGamesList {
     var platformsDictionary = HashMap<Int, Double>()
 
     //This is a boolean which stores if the dictionaries were updated since the gameList was last modified.
-    //This is initialized to false, and set to True when the dictionaries are updated as a result of the user
-    //navigating to their recccomended games list. When the user changes a game or rating in their
+    //This is initialized to false, and set to true when the dictionaries are updated as a result of the user
+    //navigating to their recommended games list. When the user changes a game or rating in their
     //favorite games list, this is set to false, and remains that way until the user next tries to look
-    //at their reccomended games list.
+    //at their recommended games list/profile.
     var dictionaryUpdated = false
 
 
@@ -27,12 +33,15 @@ class FavoriteVideoGamesList {
         dictionaryUpdated = false
     }
 
+    //This function sets the user's recommended game's list to newList,
+    //and sets dictionaryUpdated to false.
     fun setGamesList(newList: ArrayList<FavoriteGame>)
     {
         gameList = newList
         dictionaryUpdated = false
     }
 
+    //addGameToList() is a function which adds a new game to the user's profile
     fun addGameToList(newGame: FavoriteGame)
     {
         gameList.add(newGame)
@@ -45,6 +54,7 @@ class FavoriteVideoGamesList {
         dictionaryUpdated = false
     }
 
+    //This function updates the values in all of the dictionaries, and sets dictionaryUpdated to true.
     fun updateDictionaries()
     {
         updateGenreDictionary()
@@ -53,19 +63,23 @@ class FavoriteVideoGamesList {
         dictionaryUpdated = true
     }
 
+    //A helper function to update the genre dictionary.
     fun updateGenreDictionary()
     {
         //clearing the genreDictionary
         genreDictionary = HashMap<Int, Double>()
-        for(myGame in gameList)
+        for(myGame in gameList) //for each game in the user's profile...
         {
-            for(myGenre in myGame.genreList)
+            for(myGenre in myGame.genreList) //...For each genre in each game's genre list...
             {
+                //If the genre wasn't already in the dictionary, then add it with a weight of 0.0 for how much
+                //the user likes the genre
                 if(!genreDictionary.containsKey(myGenre))
                 {
                    genreDictionary.put(myGenre, 0.0)
                 }
 
+                //Genre is so important that it is given 3 times the value of tags and platforms
                 if(myGame.rating < 5)
                     genreDictionary[myGenre] = genreDictionary[myGenre]!! + ((3* (myGame.rating - 5)))
                 else
@@ -76,6 +90,7 @@ class FavoriteVideoGamesList {
 
     }
 
+    //same logic as updateGenreDictionary()
     fun updateTagDictionary()
     {
         tagDictionary = HashMap<Int, Double>()
@@ -96,12 +111,11 @@ class FavoriteVideoGamesList {
             }
         }
 
-
     }
 
+    //Same logic as updateGenreDictionary()
     fun updatePlatformsDictionary()
     {
-
         platformsDictionary = HashMap<Int, Double>()
 
         for(myGame in gameList)

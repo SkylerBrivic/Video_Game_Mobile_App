@@ -3,7 +3,7 @@ package com.example.video_game_final_project
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//This is used to represent a game in the user's local database
+//This class is used to represent a game in the user's local database
 @Entity(tableName = "gameTable")
 class GameDatabaseObject {
     @PrimaryKey

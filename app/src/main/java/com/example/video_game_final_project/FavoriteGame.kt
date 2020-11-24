@@ -2,7 +2,7 @@ package com.example.video_game_final_project
 
 //This class represents a game in the user's list of favorite games.
 //Additionally, this class is also used to temporarily hold the info from the JSON string of
-// games returned by a call to the RAWG.io server
+//games returned by a call to the RAWG.io server
 class FavoriteGame {
 
     var gameID: Int = 0
@@ -20,9 +20,12 @@ class FavoriteGame {
     //Stores the ID vals for the platforms of the game.
     var platformList = ArrayList<Int>()
 
+    //Stores the actual names of the platforms for the game (only used when loading a page for a specific game).
     var platformNames = ArrayList<String>()
+
     var previewURL = ""
-    //for games in the user's reccomended list, this is set to the appropriate value.
+
+    //for games in the user's recommended list, this is set to the appropriate value.
     var description = ""
 
     var devName = ""

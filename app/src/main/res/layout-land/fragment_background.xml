@@ -24,5 +24,6 @@
             android:scaleY="0.6"
             scrolling_image_view:speed = "0.5dp"
             scrolling_image_view:src = "@drawable/grass"/>
-
     </LinearLayout>
+
+<!--This is the same as the fragment_background.xml file, except that it sets the background fragment for when the phone is in landscape mode.-->

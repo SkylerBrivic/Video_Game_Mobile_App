@@ -22,6 +22,10 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeScreenFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+
+//HomeScreenFragment is the fragment that first loads onscreen when the user opens the app
+//It also contains all the buttons for navigating to the other fragments of the app.
 class HomeScreenFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,10 +51,12 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //when the randomButton is clicked, we clear the value of the current game, create a second thread which sets the current game to have
+        //a random game stored in it, and navigate to the random game fragment.
         randomButton.setOnClickListener {
+            viewModel.currentGame.postValue(null)
             val executorService: ExecutorService = Executors.newFixedThreadPool(1)
             executorService.execute {
-                viewModel.currentGame.postValue(null)
                 viewModel.getRandomGame()
             }
             findNavController().navigate(R.id.action_homeScreenFragment_to_randomGameFragment)
