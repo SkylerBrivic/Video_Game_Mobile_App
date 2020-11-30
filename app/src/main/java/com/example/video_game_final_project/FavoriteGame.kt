@@ -32,4 +32,6 @@ class FavoriteGame {
 
     //the user's rating of the game.
     var rating: Double = 5.0
+
+    var similarityIndex: Double = 0.0
 }

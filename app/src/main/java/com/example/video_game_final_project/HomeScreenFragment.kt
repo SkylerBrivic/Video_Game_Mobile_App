@@ -55,11 +55,29 @@ class HomeScreenFragment : Fragment() {
         //a random game stored in it, and navigate to the random game fragment.
         randomButton.setOnClickListener {
             viewModel.currentGame.postValue(null)
-            val executorService: ExecutorService = Executors.newFixedThreadPool(1)
-            executorService.execute {
-                viewModel.getRandomGame()
+
+            //only one thread may call this function at a time.
+            if(viewModel.randomGameLock.value!! == false)
+            {
+                viewModel.randomGameLock.value = true
+                val executorService: ExecutorService = Executors.newFixedThreadPool(1)
+                executorService.execute {
+                        viewModel.getRandomGame()
+                        viewModel.randomGameLock.postValue(false)
+                }
             }
-            findNavController().navigate(R.id.action_homeScreenFragment_to_randomGameFragment)
+            findNavController().navigate(R.id.action_homeScreenFragment_to_gameDescriptionFragment)
+        }
+
+        //when the Profile button is clicked, we update the list of games the user has rated in a second thread, and then navigate
+        //to the profile fragment
+        profileButton.setOnClickListener {
+            viewModel.updateProfileList()
+            findNavController().navigate(R.id.action_homeScreenFragment_to_profileFragment)
+        }
+
+        reccomendedGamesButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeScreenFragment_to_gameSuggestionsFragment)
         }
 
     }

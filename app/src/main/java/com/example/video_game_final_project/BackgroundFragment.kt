@@ -54,11 +54,11 @@ class BackgroundFragment : Fragment() {
     //All onPause() does is make both the sky image and the cat image animations stop moving.
     override fun onPause() {
         super.onPause()
-        var myScroll: ScrollingImageView = this.view?.findViewById<ScrollingImageView>(R.id.skyBackgroundID)!!
+       /* var myScroll: ScrollingImageView = this.view?.findViewById<ScrollingImageView>(R.id.skyBackgroundID)!!
         myScroll.stop()
         myScroll = this.view?.findViewById<ScrollingImageView>(R.id.grassBackgroundID)!!
         myScroll.stop()
-
+    */
     }
     companion object {
         /**

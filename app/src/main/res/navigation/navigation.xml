@@ -12,16 +12,55 @@
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" >
         <action
-            android:id="@+id/action_homeScreenFragment_to_randomGameFragment"
-            app:destination="@id/randomGameFragment"
+            android:id="@+id/action_homeScreenFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_gameDescriptionFragment"
+            app:destination="@id/gameDescriptionFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_gameSuggestionsFragment"
+            app:destination="@id/gameSuggestionsFragment"
             app:enterAnim="@animator/slide_in_left"
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_left" />
     </fragment>
     <fragment
-        android:id="@+id/randomGameFragment"
-        android:name="com.example.video_game_final_project.RandomGameFragment"
-        android:label="fragment_random_game"
-        tools:layout="@layout/fragment_random_game" />
+        android:id="@+id/profileFragment"
+        android:name="com.example.video_game_final_project.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_gameDescriptionFragment"
+            app:destination="@id/gameDescriptionFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDescriptionFragment"
+        android:name="com.example.video_game_final_project.GameDescriptionFragment"
+        android:label="GameDescriptionFragment" />
+    <fragment
+        android:id="@+id/gameSuggestionsFragment"
+        android:name="com.example.video_game_final_project.GameSuggestionsFragment"
+        android:label="fragment_game_suggestions"
+        tools:layout="@layout/fragment_game_suggestions" >
+        <action
+            android:id="@+id/action_gameSuggestionsFragment_to_gameDescriptionFragment"
+            app:destination="@id/gameDescriptionFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
+    </fragment>
 </navigation>

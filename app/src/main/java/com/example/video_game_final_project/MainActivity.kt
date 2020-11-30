@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.platformsList.value?.add(14)
         var myList = viewModel.database.value?.gameDAO()?.getAll()!!
         for(e in myList)
-            Log.d("TAG_MSG", "Game Name: " + e.gameName + "\tRating: " + e.rating.toString())
+            Log.d("TAG_MSG", "Game Name: " + e.gameName + "\tRating: " + e.rating.toString() + " Genres: " + e.genreString)
 
-        /*
+/*
         val executorService: ExecutorService = Executors.newFixedThreadPool(1)
         executorService.execute {
             var newGames = ArrayList<FavoriteGame>()

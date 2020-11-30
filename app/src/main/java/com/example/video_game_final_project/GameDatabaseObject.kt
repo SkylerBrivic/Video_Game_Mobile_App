@@ -12,4 +12,7 @@ class GameDatabaseObject {
     var releaseDate:String = ""
     var gameName:String = ""
     var rating: Double = 5.0
+    var platformString = ""
+    var genreString = ""
+    var tagString = ""
 }

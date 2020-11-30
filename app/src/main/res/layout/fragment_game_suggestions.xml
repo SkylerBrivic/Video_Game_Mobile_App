@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".GameSuggestionsFragment">
+
+    <fragment
+        android:id="@+id/myBackgroundFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.example.video_game_final_project.BackgroundFragment"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="330dp"
+        android:layout_height="530dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_marginLeft="120dp"
+                android:layout_marginRight="40dp"
+                android:text="Suggested Games:"
+                android:layout_marginBottom="5dp"/>
+
+                <!--
+                <ImageButton
+
+                    android:id="@+id/backwardsButton"
+                    android:src="@drawable/back"
+                    android:scaleType="fitXY"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+
+                <ImageButton
+                    android:id="@+id/forwardButton"
+                    android:src="@drawable/forward"
+                    android:scaleType="fitXY"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    />
+                -->
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/suggestionRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

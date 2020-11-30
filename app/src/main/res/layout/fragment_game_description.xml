@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--This fragment is what displays information about a single game when the user clicks on a game or clicks the random game button.-->
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
 
+
+    <fragment
+        android:id="@+id/descriptionBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.example.video_game_final_project.BackgroundFragment"/>
+
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="700dp"
-    android:layout_width="400dp"
+    android:layout_height="550dp"
+    android:layout_width="350dp"
     app:cardCornerRadius="30dp"
-    android:layout_marginBottom="20dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="20dp">
+    android:layout_gravity="center">
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -115,3 +125,5 @@
 
     </ScrollView>
 </androidx.cardview.widget.CardView>
+
+</FrameLayout>

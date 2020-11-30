@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_description.*
-import kotlinx.android.synthetic.main.fragment_random_game.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -127,6 +126,9 @@ class GameDescriptionFragment : Fragment() {
                 myNewObject.previewURL = viewModel.currentGame.value?.previewURL!!
                 myNewObject.releaseDate = viewModel.currentGame.value?.releaseDate!!
                 myNewObject.rating = (ratingSelector.value).toDouble()/10
+                myNewObject.platformString = convertArrayListToString(viewModel.currentGame.value?.platformList!!)
+                myNewObject.genreString = convertArrayListToString(viewModel.currentGame.value?.genreList!!)
+                myNewObject.tagString = convertArrayListToString(viewModel.currentGame.value?.tagList!!)
                 viewModel.database.value?.gameDAO()?.insert(myNewObject)
                 ratingButton.setText("Update Rating in Profile")
                 ratingButton.setBackgroundColor(resources.getColor(R.color.green))
@@ -192,5 +194,22 @@ class GameDescriptionFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun convertArrayListToString(integerList: ArrayList<Int>) : String
+    {
+        var returnString = ""
+        var tempIndex = 0
+        while(tempIndex < integerList.size)
+        {
+            if(tempIndex != 0)
+                returnString += "," + integerList.get(tempIndex).toString()
+            else
+                returnString += integerList.get(tempIndex).toString()
+
+            ++tempIndex
+        }
+
+        return returnString
     }
 }

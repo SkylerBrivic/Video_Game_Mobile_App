@@ -1,5 +1,7 @@
 package com.example.video_game_final_project
 
+import android.util.Log
+
 //FavoriteVideoGamesList is a class which contains dictionaries which reflect how popular
 //(or unpopular) specific genres, tags, and platforms were for the user.
 
@@ -57,10 +59,12 @@ class FavoriteVideoGamesList {
     //This function updates the values in all of the dictionaries, and sets dictionaryUpdated to true.
     fun updateDictionaries()
     {
+        Log.d("TAG_MSG", "Called updateDictionaries()!")
         updateGenreDictionary()
         updateTagDictionary()
         updatePlatformsDictionary()
         dictionaryUpdated = true
+        Log.d("TAG_MSG", "In updateDictionaries before returning, genre dictionary was size: " + genreDictionary.keys.size.toString())
     }
 
     //A helper function to update the genre dictionary.

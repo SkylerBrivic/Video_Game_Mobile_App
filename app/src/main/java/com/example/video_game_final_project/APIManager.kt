@@ -267,10 +267,24 @@ class APIManager(val viewModel: GameViewModel) {
                 for(platformIndex in 0 until platformList.length())
                 {
                     returnGame.platformNames.add(platformList.getJSONObject(platformIndex).getJSONObject("platform").getString("name"))
+                    returnGame.platformList.add(platformList.getJSONObject(platformIndex).getJSONObject("platform").getInt("id"))
                 }
 
                 if(returnGame.platformNames.isEmpty())
                     returnGame.platformNames.add("N/A")
+
+                var genreList = jsonObj.getJSONArray("genres")
+                for(genreIndex in 0 until genreList.length())
+                {
+                    returnGame.genreList.add(genreList.getJSONObject(genreIndex).getInt("id"))
+                }
+
+              var tagList = jsonObj.getJSONArray("tags")
+                for(tagIndex in 0 until tagList.length())
+                {
+                    returnGame.tagList.add(tagList.getJSONObject(tagIndex).getInt("id"))
+                }
+
             }
 
         }
