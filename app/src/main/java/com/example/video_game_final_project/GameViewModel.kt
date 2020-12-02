@@ -19,16 +19,22 @@ class GameViewModel : ViewModel() {
     var currentGame = MutableLiveData<FavoriteGame>() //Stores the game whose details the user is currently looking at (only applicable when the GameDescriptionFragment is onscreen).
     var genGamesUpToDate = MutableLiveData<Boolean>() //A boolean which is true when genGamesList has not changed since the last time updateSuggestedGamesList() was called, and false otherwise (i.e. when the Favorite Games List changes or a new platform is added to the platformsList)
     var platformsList = MutableLiveData<MutableSet<Int>>() //A list of the ID values of the platforms that the user owns.
+    var searchGamesList = MutableLiveData<ArrayList<FavoriteGame>>() // this list stores the results returned by the function that searches for games matching user search criteria
+    var allPlatformsList = MutableLiveData<ArrayList<Platform>>() // A list containing the information for all 51 platforms in the RAWG.io API
     var database = MutableLiveData<GameDB>() //A GameDB reference
 
+
+    var platformsInitialized = MutableLiveData<Boolean>() // determines if platform list has been initialized yet
     var randomGameLock = MutableLiveData<Boolean>() // lock controlling entry to randomGame function (true when function is in use by a thread)
     var suggestedGamesLock = MutableLiveData<Boolean>() // lock controlling entry to suggestedGames function (true when function is in use by a thread)
+    var searchGamesLock = MutableLiveData<Boolean>() // lock controlling entry to gameSearch function (true when function is in use by a thread)
 
     var suggestedGamePageNum = MutableLiveData<Int>() // specifies which page we are on in the suggested game search fragment
     var profilePageNum = MutableLiveData<Int>() //specifies which page we are on in the user's profile of games.
 
     init {
         apiManager.value = APIManager(this)
+        platformsInitialized.value = false
         bestGamesList.value = FavoriteVideoGamesList()
         suggestedGamesList.value = ArrayList<FavoriteGame>()
         genGamesUpToDate.value = false
@@ -39,6 +45,9 @@ class GameViewModel : ViewModel() {
         suggestedGamesLock.value = false
         suggestedGamePageNum.value = 1
         profilePageNum.value = 1
+        searchGamesList.value = ArrayList<FavoriteGame>()
+        allPlatformsList.value = ArrayList<Platform>()
+        searchGamesLock.value = false
     }
 
     //Function to force the ViewModel to be initialized (prevents a multi-threading data race error)
@@ -49,7 +58,7 @@ class GameViewModel : ViewModel() {
     //getGenresString() returns a String representation of all the genres of games in the user's Favorite Games List.
     //For example, if the user had games in their FavoriteGamesList with genres whose IDs were 5, 2, and 17, then the
     //following string would be returned by getGenresString(): "5,2,17"
-    fun getGenresString() : String
+    fun getGenresString() : String?
     {
         var finalGenreString = ""
 
@@ -83,7 +92,7 @@ class GameViewModel : ViewModel() {
 
     //!!!!!!!IMPORTANT NOTE!!!!!!: The platforms the user owns are determined solely by looking at the platformsList of the viewModel, which is set in the addPlatformFragment
     //The list of games the user has rated is not used to determine what to include in the platform string returned by this function (although genres for the getGenresString() function are determined from looking at the genres of the games that the user has rated)
-    fun getPlatformString() : String
+    fun getPlatformString() : String?
     {
         var finalString = ""
         for(e in platformsList.value!!)
@@ -170,17 +179,15 @@ class GameViewModel : ViewModel() {
         var pageIndex = 1
 
         var platformString = getPlatformString()
-        if(platformString.isEmpty() || platformString.isBlank())
+        if(platformString!!.isEmpty() || platformString.isBlank())
         {
-            Log.d("TAG_MSG", "Error: Platform list was empty. At least one allowed platform must be in list for any games to be returned.")
-            return
+            platformString = null
         }
 
         var genreString = getGenresString()
-        if(genreString.isEmpty() || genreString.isBlank())
+        if(genreString!!.isEmpty() || genreString.isBlank())
         {
-            Log.d("TAG_MSG", "Error: Genre list was empty, which means no games were in the recomended list. Please add at least one game to the list, then try again!")
-            return
+           genreString = null
         }
 
         apiManager.value?.hitEnd = false
@@ -346,5 +353,61 @@ class GameViewModel : ViewModel() {
         Log.d("TAG_MSG", "In convertStringToArrayList, value of " + returnList.toString())
         return returnList
     }
+
+    //this function takes as input a string representing the platforms the user will accept in their search results (or null if any platform is OK).
+    //This function also takes as input a search string which represents the criteria the user wants to search for (or null if the user doesn't want any search terms here).
+    //This function updates the searchGamesList with the 99 most-relevant games to the user's search in order of most relevant (or less than 99 if fewer than 99 results were
+    //returned by the call to the API)
+    fun searchForMatchingGames(platformString: String?, searchString: String?)
+    {
+        var returnList = ArrayList<FavoriteGame>()
+
+        for(i in 1 .. 3)
+        {
+            Log.d("TAG_MSG", "i is " + i.toString())
+            var jsonObj = JSONObject(apiManager.value?.searchForMatchingGames(i, 33, platformString, searchString)!!)
+
+            if (apiManager.value?.checkIfPageValid(jsonObj)!!)
+            {
+                matchingGameHelperFunc(returnList, jsonObj)
+            }
+
+            else
+            {
+                Log.d("TAG_MSG", "Page Invalid!")
+               break
+            }
+        }
+
+        searchGamesList.postValue(returnList)
+        return
+    }
+
+    //helper function which adds the game in jsonObj to the end of returnList
+    fun matchingGameHelperFunc(returnList: ArrayList<FavoriteGame>, jsonObj: JSONObject)
+    {
+        var jsonArray = jsonObj.getJSONArray("results")
+
+        for(i in 0 until jsonArray.length())
+        {
+            var newFavoriteGameObj = FavoriteGame()
+            var gameObj = jsonArray.getJSONObject(i)
+            newFavoriteGameObj.gameID = gameObj.getInt("id")
+            newFavoriteGameObj.gameName = gameObj.getString("name")
+            if(newFavoriteGameObj.gameName.isBlank() || newFavoriteGameObj.gameName.equals("null", true))
+                newFavoriteGameObj.gameName = "N/A"
+            newFavoriteGameObj.previewURL = gameObj.getString("background_image")
+            if(newFavoriteGameObj.previewURL.isBlank() || newFavoriteGameObj.previewURL.equals("null", true))
+                newFavoriteGameObj.previewURL = "image_not_available"
+            newFavoriteGameObj.releaseDate = gameObj.getString("released")
+            if(newFavoriteGameObj.releaseDate.isBlank() || newFavoriteGameObj.releaseDate.equals("null", true))
+                newFavoriteGameObj.releaseDate = "N/A"
+            returnList.add(newFavoriteGameObj)
+        }
+
+        return
+    }
+
+
 
 }

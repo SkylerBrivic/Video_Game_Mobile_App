@@ -32,6 +32,20 @@
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_left" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_generalSearchFragment"
+            app:destination="@id/generalSearchFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_gettingStartedFragment"
+            app:destination="@id/gettingStartedFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -63,4 +77,21 @@
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_left" />
     </fragment>
+    <fragment
+        android:id="@+id/generalSearchFragment"
+        android:name="com.example.video_game_final_project.GeneralSearchFragment"
+        android:label="fragment_general_search"
+        tools:layout="@layout/fragment_general_search" >
+        <action
+            android:id="@+id/action_generalSearchFragment_to_gameDescriptionFragment"
+            app:destination="@id/gameDescriptionFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/gettingStartedFragment"
+        android:name="com.example.video_game_final_project.GettingStartedFragment"
+        android:label="GettingStartedFragment" />
 </navigation>

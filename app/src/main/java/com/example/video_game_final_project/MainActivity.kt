@@ -10,11 +10,40 @@ import androidx.activity.viewModels
 //All fragments are loaded into this MainActivity.
 class MainActivity : AppCompatActivity() {
     val viewModel by viewModels<GameViewModel>()
+
+
+    fun loadData()
+    {
+        if(viewModel.platformsInitialized.value!! == true)
+            return
+        viewModel.allPlatformsList.value = ArrayList<Platform>()
+        val dataString = resources.openRawResource(R.raw.platforms).bufferedReader().use { it.readText() }
+        var lines = dataString.trim().split("\n")
+        lines = lines.subList(1, lines.size)
+        lines.forEach {
+            viewModel.allPlatformsList.value?.add(makePlatform(it.trim()))
+        }
+        viewModel.allPlatformsList.value?.sortBy { it.name }
+        viewModel.platformsInitialized.value = true
+    }
+
+    fun makePlatform(inputString: String) : Platform
+    {
+        val commaList = inputString.split(",")
+        val platformID = commaList[0].toInt()
+        val platformName = commaList[1]
+
+        //set appropriate image values for platforms here based on name
+        return Platform(platformID, platformName, -1)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModel.database.value = GameDB.getDBObject(this)
         viewModel.initialize()
+        loadData()
 
         //All of the code below is used for debugging, and should be deleted or commented out later on.
         viewModel.platformsList.value?.add(14)

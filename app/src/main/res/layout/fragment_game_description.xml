@@ -82,7 +82,7 @@
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:text="Summary: "
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailedPlatformsText"/>

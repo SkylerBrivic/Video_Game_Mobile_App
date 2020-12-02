@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <fragment
+        android:id="@+id/descriptionBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.example.video_game_final_project.BackgroundFragment"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="650dp"
+        android:layout_height="380dp"
+        app:cardCornerRadius="20dp"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Getting Started: "
+                android:layout_gravity="center"/>
+
+
+            <ScrollView
+                android:layout_width="650dp"
+                android:layout_height="300dp">
+            <TextView
+                android:id="@+id/mainText"
+                android:layout_width="650dp"
+                android:layout_height="380dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="10dp"
+                android:text="\nWelcome to the Sky Cat Video Game App!\n\nIn order to get started using the app, you should first go to the 'Add Platforms' screen to add which platforms you own.\n\nAfter that, you will be able to see randomly-selected games in the I'm feeling lucky section.\n\nIf you use the general game search feature, you can find a list of games matching your specific search criteria. Simply tap on a game in the resulting list in order to get more detailed information about the game, as well as to rate it.\n\nYou can view any game you have rated in your profile. Clicking on a game will give you the ability to change the game's rating, or to unrate the game as well.\n\nOnce you have rated some games and added which consoles you own, you can click on the 'Reccomended Games' button, which will display a list of games you may like based on how you rated the games in your profile, which will be sorted so that the game's you are most likely to enjoy appear at the top of the screen.\n\nWe hope you enjoy using our app!"/>
+            </ScrollView>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

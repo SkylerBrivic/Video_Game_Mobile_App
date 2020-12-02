@@ -80,6 +80,14 @@ class HomeScreenFragment : Fragment() {
             findNavController().navigate(R.id.action_homeScreenFragment_to_gameSuggestionsFragment)
         }
 
+        generalSearchButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeScreenFragment_to_generalSearchFragment)
+        }
+
+        tutorialButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeScreenFragment_to_gettingStartedFragment)
+        }
+
     }
 
     companion object {

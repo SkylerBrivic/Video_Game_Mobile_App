@@ -42,7 +42,7 @@ class APIManager(val viewModel: GameViewModel) {
     //returned by the call to the server for games on this page for these platforms and genres specified.
     //If pageNum is an invalid page (past the end of the search results), then tempGamesList is set to an empty list,
     //and hitEnd is set to true.
-    fun getSuggestedGames(pageNum: Int, platformString: String, genreString: String)
+    fun getSuggestedGames(pageNum: Int, platformString: String?, genreString: String?)
     {
         hitEnd = false
         val retrofit = Retrofit.Builder().baseUrl(apiURL).build()
@@ -156,10 +156,7 @@ class APIManager(val viewModel: GameViewModel) {
 
     //This is used by the random game generator fragment to check what the last valid page
     //to be included in the randomly generated game can be.
-    fun getLastValidPage(platformString: String) : Int {
-        if(platformString.isBlank() || platformString.equals("null", true))
-            return -1
-
+    fun getLastValidPage(platformString: String?) : Int {
         val retrofit = Retrofit.Builder().baseUrl(apiURL).build()
         val service = retrofit.create(gameService::class.java)
         val call = service.checkIfValidRandomPage("Clark_Video_Game_App", apiKey, 1, 1, platformString, "name")
@@ -185,7 +182,7 @@ class APIManager(val viewModel: GameViewModel) {
     //the comma-separated list of IDs of the platforms the user owns.
     //The function returns the JSON String that results from querying the API with the specified parameters
     //using the checkIfValidRandomPage() function of the gameService interface.
-    fun getRandomPage(pageNum: Int, platformString: String) : String
+    fun getRandomPage(pageNum: Int, platformString: String?) : String
     {
         val retrofit = Retrofit.Builder().baseUrl(apiURL).build()
         val service = retrofit.create(gameService::class.java)
@@ -293,6 +290,39 @@ class APIManager(val viewModel: GameViewModel) {
     }
 
 
+    //searchForMatchingGames() returns the jsonString returned by the server when a search for matching games is performed with the following parameters.
+    //Note that if platformString or searchString are null, they are not included in the http request.
+    fun searchForMatchingGames(pageNum: Int, pageSize: Int, platformString: String?, searchString: String?) : String
+    {
+        if(platformString != null)
+            Log.d("TAG_MSG", "Platform String is " + platformString)
+        else
+            Log.d("TAG_MSG", "Platform String is NULL")
+
+        if(searchString != null)
+            Log.d("TAG_MSG", "searchString is " + searchString)
+        else
+            Log.d("TAG_MSG", "searchString is NULL")
+
+        Log.d("TAG_MSG", "pageNum is " + pageNum.toString())
+        Log.d("TAG_MSG", "pageSize is " + pageSize.toString())
+
+        val retrofit = Retrofit.Builder().baseUrl(apiURL).build()
+        val service = retrofit.create(gameService::class.java)
+        val call = service.searchForMatchingGames("Clark_Video_Game_App", apiKey, pageNum, pageSize, platformString, searchString)
+        var response = call.execute()
+        if(response.isSuccessful)
+        {
+            var body = response.body()
+            if(body != null)
+            {
+                return body.string()
+            }
+        }
+
+        return "{\"detail\":\"Invalid page.\"}"
+    }
+
     //the gameService interface handles all calls to the RAWG.io server
 
     //the getSuggestedGames() function returns a list of games on the specified page
@@ -306,6 +336,8 @@ class APIManager(val viewModel: GameViewModel) {
     //getSpecificGame() returns details about a specific game with the ID value matching
     //the value passed into the getSpecificGame() function.
 
+    //searchForMatchingGame() takes as input a list of platforms and a search string, and finds all games matching
+    //the search criterion for games in the console list (sorted in order of most relevant to least relevant)
     interface gameService
     {
         @GET("games")
@@ -314,8 +346,8 @@ class APIManager(val viewModel: GameViewModel) {
             @Query(value="key") myApiKey: String,
             @Query(value="page") pageNum: Int,
             @Query(value="page_size") pageSize: Int = 40,
-            @Query(value="platforms", encoded = true) platformString: String,
-            @Query(value="genres", encoded=true) genreString: String
+            @Query(value="platforms", encoded = true) platformString: String?,
+            @Query(value="genres", encoded=true) genreString: String?
             )
         : Call<ResponseBody>
 
@@ -326,7 +358,7 @@ class APIManager(val viewModel: GameViewModel) {
             @Query(value="key") myApiKey: String,
             @Query(value = "page") pageNum: Int,
             @Query(value="page_size") pageSize: Int = 1,
-            @Query(value="platforms", encoded = true) platformString: String,
+            @Query(value="platforms", encoded = true) platformString: String?,
             @Query(value="ordering") orderingString: String = "name")
         : Call<ResponseBody>
 
@@ -337,6 +369,15 @@ class APIManager(val viewModel: GameViewModel) {
             @Path("id") myID: Int,
             @Query(value="key") myApiKey: String) : Call<ResponseBody>
 
+
+        @GET("games")
+        fun searchForMatchingGames(
+            @Header(value="User-Agent") appName: String,
+            @Query(value="key") myApiKey: String,
+            @Query(value = "page") pageNum: Int,
+            @Query(value = "page_size") pageSize: Int = 1,
+            @Query(value="platforms", encoded = true) platformString: String?,
+            @Query(value="search") searchString: String?) : Call<ResponseBody>
     }
 
 }

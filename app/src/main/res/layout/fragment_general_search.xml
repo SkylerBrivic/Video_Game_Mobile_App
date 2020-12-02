@@ -14,8 +14,8 @@
         android:name="com.example.video_game_final_project.BackgroundFragment"/>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="360dp"
-        android:layout_height="650dp"
+        android:layout_width="350dp"
+        android:layout_height="550dp"
         app:cardCornerRadius="20dp"
         android:layout_gravity="center">
 
@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="650dp"
+                    android:layout_height="550dp"
                     android:minHeight="650dp">
 
                     <TextView
@@ -90,7 +90,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/generalSearchRecycler"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="450dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
