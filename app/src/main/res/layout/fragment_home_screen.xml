@@ -48,33 +48,34 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="50dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <Button
                 android:id="@+id/tutorialButton"
-                android:layout_width="wrap_content"
+                android:layout_width="174dp"
                 android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
                 android:drawableStart="@drawable/icon"
                 android:drawablePadding="5dp"
-                android:text="Getting Started" />
-
+                android:text="Getting\nStarted" />
 
             <Button
                 android:id="@+id/platformsButton"
-                android:layout_width="wrap_content"
+                android:layout_width="196dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="-25dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="0dp"
                 android:drawableStart="@drawable/console"
                 android:drawablePadding="5dp"
-                android:text="Add Your Consoles" />
+                android:text="Add Your\nConsoles" />
 
 
         </TableRow>
@@ -86,23 +87,23 @@
 
             <Button
                 android:id="@+id/profileButton"
-                android:layout_width="wrap_content"
+                android:layout_width="163dp"
                 android:layout_height="70dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
                 android:drawableStart="@drawable/viewprofile"
                 android:drawablePadding="5dp"
-                android:text="View Profile" />
+                android:text="View \nrofile" />
 
             <Button
                 android:id="@+id/reccomendedGamesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="-25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="0dp"
                 android:drawableStart="@drawable/reccomend"
                 android:drawablePadding="5dp"
-                android:text="Reccomended Games" />
+                android:text="Reccomended\nGames" />
 
 
         </TableRow>
@@ -114,22 +115,22 @@
 
             <Button
                 android:id="@+id/generalSearchButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
                 android:drawableStart="@drawable/gensearch"
                 android:drawablePadding="5dp"
-                android:text="General Search" />
+                android:text="General\nSearch" />
 
             <Button
                 android:id="@+id/randomButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="-25dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="0dp"
                 android:drawableStart="@drawable/feellucky"
-                android:text="I'm Feeling Lucky!" />
+                android:text="I'm Feeling\nLucky!" />
 
 
         </TableRow>
