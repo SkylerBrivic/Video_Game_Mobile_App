@@ -11,6 +11,9 @@ interface PlatformDAO {
     @Query("SELECT * FROM platformDB")
     fun getAll() : List<Platform>
 
+    @Query("SELECT * FROM platformDB WHERE platformId =:id")
+    fun getPlatform(id: Int): List<Platform>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(newOwned: Platform)
 

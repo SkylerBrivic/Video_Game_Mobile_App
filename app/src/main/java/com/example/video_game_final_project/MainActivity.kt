@@ -11,11 +11,11 @@ import androidx.activity.viewModels
 class MainActivity : AppCompatActivity() {
     val viewModel by viewModels<GameViewModel>()
 
-
     fun loadData()
     {
         if(viewModel.platformsInitialized.value!! == true)
             return
+
         viewModel.allPlatformsList.value = ArrayList<Platform>()
         val dataString = resources.openRawResource(R.raw.platforms).bufferedReader().use { it.readText() }
         var lines = dataString.trim().split("\n")

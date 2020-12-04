@@ -55,6 +55,11 @@ class PlatformFragment : Fragment() {
 
         platform_recycler.layoutManager = viewManger
         platform_recycler.adapter = viewAdapter
+        viewModel.database.value = GameDB.getDBObject(context!!)
+        viewModel.addPlatformList(viewModel.allPlatformsList.value!!.toTypedArray())
+        viewAdapter.platformData = viewModel.allPlatformsList.value!!
+        viewAdapter.notifyDataSetChanged()
+
         val mDividerItemDecoration = DividerItemDecoration(
             platform_recycler.getContext(),
             VERTICAL

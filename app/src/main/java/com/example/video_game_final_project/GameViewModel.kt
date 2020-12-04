@@ -417,6 +417,33 @@ class GameViewModel : ViewModel() {
 
     }
 
+    fun isInPlatformDB(platform:Platform):Boolean{
+        val list = database.value?.platformDAO()?.getPlatform(platform.platformId)
+        if (list==null){
+            return false
+        } else if (list!!.size>=1) {
+            return true
+        }
+        return false
+    }
+
+    fun filterList(){
+        allPlatformsList.value!!.forEach {
+            if (isInPlatformDB(it)){
+                val list = database.value?.platformDAO()?.getPlatform(it.platformId)
+                it.isOwned = list!!.get(0)!!.isOwned
+            }
+        }
+        allPlatformsList.postValue(allPlatformsList.value)
+    }
+
+    fun addPlatformList(array:Array<Platform>){
+        val newArr = array.toCollection(ArrayList())
+        allPlatformsList.value = newArr
+        filterList()
+        allPlatformsList.postValue(newArr)
+    }
+
 
 
 }
