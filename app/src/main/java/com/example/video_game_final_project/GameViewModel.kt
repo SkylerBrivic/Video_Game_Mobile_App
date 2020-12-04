@@ -18,7 +18,6 @@ class GameViewModel : ViewModel() {
     var profileGamesList = MutableLiveData<ArrayList<FavoriteGame>>() //This stores the games in the user's profile
     var currentGame = MutableLiveData<FavoriteGame>() //Stores the game whose details the user is currently looking at (only applicable when the GameDescriptionFragment is onscreen).
     var genGamesUpToDate = MutableLiveData<Boolean>() //A boolean which is true when genGamesList has not changed since the last time updateSuggestedGamesList() was called, and false otherwise (i.e. when the Favorite Games List changes or a new platform is added to the platformsList)
-    var platformsList = MutableLiveData<MutableSet<Int>>() //A list of the ID values of the platforms that the user owns.
     var searchGamesList = MutableLiveData<ArrayList<FavoriteGame>>() // this list stores the results returned by the function that searches for games matching user search criteria
     var allPlatformsList = MutableLiveData<ArrayList<Platform>>() // A list containing the information for all 51 platforms in the RAWG.io API
     var database = MutableLiveData<GameDB>() //A GameDB reference
@@ -39,7 +38,6 @@ class GameViewModel : ViewModel() {
         suggestedGamesList.value = ArrayList<FavoriteGame>()
         genGamesUpToDate.value = false
         profileGamesList.value = ArrayList<FavoriteGame>()
-        platformsList.value = mutableSetOf()
         currentGame.value = FavoriteGame()
         randomGameLock.value = false
         suggestedGamesLock.value = false
@@ -78,12 +76,6 @@ class GameViewModel : ViewModel() {
 
     }
 
-    //addPlatform() adds the specified platform ID to the platformsList
-    fun addPlatform(newPlatform:Int)
-    {
-        genGamesUpToDate.postValue(false)
-        platformsList.value?.add(newPlatform)
-    }
 
 
     //getPlatformString() returns a String representation of the IDs of all the platforms the user has selected that they own.
@@ -95,9 +87,10 @@ class GameViewModel : ViewModel() {
     fun getPlatformString() : String?
     {
         var finalString = ""
-        for(e in platformsList.value!!)
+        for(e in allPlatformsList.value!!)
         {
-            finalString += (e.toString() + ",")
+            if(e.isOwned)
+                finalString += (e.platformId.toString() + ",")
         }
 
         //Stripping off trailing comma from String
@@ -114,13 +107,13 @@ class GameViewModel : ViewModel() {
     //This function is what is called to select the random game in the RandomGameFragment
     fun getRandomGame()
     {
-        if(platformsList.value?.isEmpty()!!)
+        var platformString = getPlatformString()
+        if(platformString?.isEmpty()!!)
         {
             Log.d("TAG_MSG", "Error: You have to add a platform to your list before a random game can be returned!")
             return
         }
 
-        var platformString = getPlatformString()
         var lastPageIndex = apiManager.value?.getLastValidPage(platformString)!!
 
         //Choosing a random page to select games from.
