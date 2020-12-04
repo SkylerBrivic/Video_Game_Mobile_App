@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val platformName = commaList[1]
 
         //set appropriate image values for platforms here based on name
-        return Platform(platformID, platformName, -1)
+        return Platform(platformID, platformName, false, -1)
     }
 
 

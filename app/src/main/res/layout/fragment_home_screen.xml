@@ -21,15 +21,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="top|center"
-        android:textColor="@color/red"
-        android:background="@color/grey"
-        android:text="Welcome to the Sky Cat Video Game Searcher App!" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="398dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/multicolor"
+            android:text="Welcome to \nSky Cat Video Game Searcher App!"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="19dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -37,15 +39,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
         android:layout_marginTop="28dp"
-        android:textColor="@color/red"
-        android:background="@color/grey"
-        android:text="Written by Skyler Brivic &amp; Cat Mei" />
+        android:textSize="16dp"
+        android:textColor="#000000"
+        android:fontFamily="@font/caviarbi"
+        android:text="Written by Skyler Brivic &amp; Cat Mai" />
 
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="50dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -54,17 +58,22 @@
             <Button
                 android:id="@+id/tutorialButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableStart="@drawable/icon"
+                android:drawablePadding="5dp"
                 android:text="Getting Started" />
 
 
             <Button
                 android:id="@+id/platformsButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="-25dp"
                 android:layout_marginRight="30dp"
+                android:drawableStart="@drawable/console"
+                android:drawablePadding="5dp"
                 android:text="Add Your Consoles" />
 
 
@@ -78,16 +87,21 @@
             <Button
                 android:id="@+id/profileButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableStart="@drawable/viewprofile"
+                android:drawablePadding="5dp"
                 android:text="View Profile" />
 
             <Button
                 android:id="@+id/reccomendedGamesButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="30dp"
+                android:layout_marginLeft="-25dp"
+                android:drawableStart="@drawable/reccomend"
+                android:drawablePadding="5dp"
                 android:text="Reccomended Games" />
 
 
@@ -101,16 +115,20 @@
             <Button
                 android:id="@+id/generalSearchButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableStart="@drawable/gensearch"
+                android:drawablePadding="5dp"
                 android:text="General Search" />
 
             <Button
                 android:id="@+id/randomButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="-25dp"
                 android:layout_marginRight="30dp"
+                android:drawableStart="@drawable/feellucky"
                 android:text="I'm Feeling Lucky!" />
 
 

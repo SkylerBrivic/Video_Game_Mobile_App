@@ -306,8 +306,6 @@ class GameViewModel : ViewModel() {
                 profileGamesList.value?.add(newGame)
                 bestGamesList.value?.addGameToList(newGame)
             }
-
-
         }
 
     fun updateBestGamesList()
@@ -406,6 +404,17 @@ class GameViewModel : ViewModel() {
         }
 
         return
+    }
+
+    fun updateAllPlatformList(platform: Platform){
+        val index = allPlatformsList.value!!.indexOf(platform)
+        allPlatformsList.value!![index].isOwned = platform.isOwned
+        if (platform.isOwned)
+            database.value?.platformDAO()?.insert(platform)
+        else{
+            database.value?.platformDAO()?.deletePlatformByID(platform.platformId)
+        }
+
     }
 
 

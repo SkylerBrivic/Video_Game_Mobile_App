@@ -88,6 +88,10 @@ class HomeScreenFragment : Fragment() {
             findNavController().navigate(R.id.action_homeScreenFragment_to_gettingStartedFragment)
         }
 
+        platformsButton.setOnClickListener {
+            findNavController().navigate((R.id.action_homeScreenFragment_to_platformFragment))
+        }
+
     }
 
     companion object {

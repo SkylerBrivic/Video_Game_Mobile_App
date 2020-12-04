@@ -46,6 +46,13 @@
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_left" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_platformFragment"
+            app:destination="@id/platformFragment"
+            app:enterAnim="@animator/slide_in_left"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -94,4 +101,9 @@
         android:id="@+id/gettingStartedFragment"
         android:name="com.example.video_game_final_project.GettingStartedFragment"
         android:label="GettingStartedFragment" />
+    <fragment
+        android:id="@+id/platformFragment"
+        android:name="com.example.video_game_final_project.PlatformFragment"
+        android:label="fragment_platform"
+        tools:layout="@layout/fragment_platform" />
 </navigation>

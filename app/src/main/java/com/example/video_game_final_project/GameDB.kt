@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 
 //This database class uses the GameDatabaseObject to model each entity,
 //and uses the GameDAO class for all database queries.
-@Database(entities = [GameDatabaseObject::class], version = 1)
+@Database(entities = [GameDatabaseObject::class, Platform::class], version = 2, exportSchema = false)
 abstract class GameDB : RoomDatabase() {
 
     abstract fun gameDAO(): GameDAO
+    abstract fun platformDAO(): PlatformDAO
 
     companion object{
         private var INSTANT: GameDB? = null
