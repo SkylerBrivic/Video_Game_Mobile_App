@@ -49,7 +49,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp">
 
             <TableRow
@@ -58,28 +58,28 @@
 
                 <Button
                     android:id="@+id/tutorialButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
                     android:drawableStart="@drawable/icon"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
-                    android:text="Getting Started" />
+                    android:layout_marginRight="20dp"
+                    android:text="Getting\nStarted" />
 
 
                 <Button
                     android:id="@+id/platformsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
+                    android:layout_width="170dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:drawableStart="@drawable/console"
                     android:drawablePadding="10dp"
-                    android:text="Add Your Consoles" />
+                    android:text="Add Your\n   Consoles" />
 
                 <Button
                     android:id="@+id/profileButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:drawableStart="@drawable/viewprofile"
                     android:drawablePadding="10dp"
                     android:text="View Profile" />
@@ -94,31 +94,31 @@
 
                 <Button
                     android:id="@+id/reccomendedGamesButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="170dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginRight="20dp"
                     android:drawableStart="@drawable/reccomend"
                     android:drawablePadding="10dp"
-                    android:text="Reccomended Games" />
+                    android:text="Reccomended\nGames" />
 
                 <Button
                     android:id="@+id/generalSearchButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:drawableStart="@drawable/gensearch"
                     android:drawablePadding="10dp"
-                    android:text="General Search" />
+                    android:text="General\nSearch" />
 
                 <Button
                     android:id="@+id/randomButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:drawableStart="@drawable/feellucky"
                     android:drawablePadding="10dp"
-                    android:text="I'm Feeling Lucky!" />
+                    android:text="I'm Feeling\nLucky!" />
 
             </TableRow>
 
